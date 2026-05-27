@@ -2,9 +2,760 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>準備中</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>uemayo | 中小企業の社内ITサポート</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #0B9B8A;
+      --teal-light: #12C4AE;
+      --teal-pale: #E6F8F6;
+      --blue: #1E6FD9;
+      --blue-light: #3D8EF5;
+      --blue-pale: #EAF2FE;
+      --sky: #E8F7FF;
+      --dark: #0F2137;
+      --mid: #3A5068;
+      --muted: #7A93A8;
+      --white: #FFFFFF;
+      --bg: #F4FAFB;
+      --border: #D0E8E6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--teal);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--blue); }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+
+    nav a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--teal); }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--white) !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.1s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--teal-light) !important;
+      transform: translateY(-1px);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      padding: 120px 2rem 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(11,155,138,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 60%, rgba(30,111,217,0.10) 0%, transparent 60%),
+        linear-gradient(180deg, var(--sky) 0%, var(--bg) 100%);
+      z-index: 0;
+    }
+
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(11,155,138,0.15) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--teal-pale);
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(11,155,138,0.3);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 58px);
+      font-weight: 900;
+      line-height: 1.25;
+      color: var(--dark);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--teal);
+      position: relative;
+    }
+
+    .hero h1 em::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--blue-light));
+      border-radius: 2px;
+      opacity: 0.4;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--mid);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal), var(--blue-light));
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(11,155,138,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(11,155,138,0.45);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--teal);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid var(--teal);
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--teal-pale);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section { padding: 80px 2rem; }
+
+    .container { max-width: 960px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-block;
+      background: var(--teal-pale);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--mid);
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    /* ===== SERVICES ===== */
+    #services { background: var(--white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--blue-light));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(11,155,138,0.12);
+      border-color: var(--teal);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--teal-pale);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ===== PRICING ===== */
+    #pricing { background: var(--bg); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--teal);
+      box-shadow: 0 8px 32px rgba(11,155,138,0.15);
+      position: relative;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--teal), var(--blue-light));
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(11,155,138,0.12);
+    }
+
+    .pricing-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .pricing-note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pricing-features li {
+      font-size: 14px;
+      color: var(--mid);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--teal);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--white); }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-visual {
+      background: linear-gradient(135deg, var(--teal-pale), var(--blue-pale));
+      border-radius: 24px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      border: 1px solid var(--border);
+    }
+
+    .about-text h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .about-text p {
+      font-size: 15px;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .about-tag {
+      background: var(--teal-pale);
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 50px;
+      border: 1px solid rgba(11,155,138,0.25);
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .contact-inner .section-label {
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+
+    .contact-inner .section-title { color: var(--white); }
+
+    .contact-inner .section-desc {
+      color: rgba(255,255,255,0.8);
+      margin: 0 auto 40px;
+    }
+
+    .contact-box {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 36px 40px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .contact-email {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+
+    .contact-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 24px;
+    }
+
+    .contact-cta {
+      display: inline-block;
+      background: var(--white);
+      color: var(--teal);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .contact-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 28px 2rem;
+      font-size: 13px;
+    }
+
+    footer strong { color: rgba(255,255,255,0.8); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 680px) {
+      nav a:not(.nav-cta) { display: none; }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-visual { aspect-ratio: auto; padding: 40px; }
+      .contact-box { padding: 28px 24px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>準備中</h1>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">uema<span>yo</span></div>
+    <nav>
+      <a href="#services">サービス</a>
+      <a href="#pricing">料金</a>
+      <a href="#about">about</a>
+      <a href="#contact" class="nav-cta">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-dots"></div>
+    <div class="hero-content">
+      <div class="hero-tag">🖥️ 中小企業の社内IT専門</div>
+      <h1>
+        IT管理、<em>もっとシンプル</em>に<br>できます。
+      </h1>
+      <p class="hero-sub">
+        社員情報・入退社・デバイス管理まで、<br>
+        まとめてサポート。ITが苦手な会社でも安心して使えます。
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">無料相談はこちら</a>
+        <a href="#services" class="btn-secondary">サービスを見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <span class="section-label">Services</span>
+      <h2 class="section-title fade-up">こんなことができます</h2>
+      <p class="section-desc fade-up">面倒なIT管理をまるごとお任せ。専門知識がなくても大丈夫です。</p>
+      <div class="services-grid">
+        <div class="service-card fade-up">
+          <div class="service-icon">👤</div>
+          <h3>社員情報管理</h3>
+          <p>氏名・連絡先・役職・入社日などをひとつのシステムで一元管理。Excelのバラバラ管理から卒業できます。</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon">🚪</div>
+          <h3>入退社手続き</h3>
+          <p>入社・退社時の手続きフローを整備。アカウント作成・権限設定・機器の手配までサポートします。</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon">💻</div>
+          <h3>デバイス・備品管理</h3>
+          <p>PC・スマホ・周辺機器などの管理台帳作成から、紛失・故障時の対応方針づくりまでお手伝いします。</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon">🔔</div>
+          <h3>Slack通知連携</h3>
+          <p>入退社のアラートや期限通知を自動でSlackに届けます。担当者が気づかない、を防ぎます。</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon">🛠️</div>
+          <h3>ITサポート全般</h3>
+          <p>「パソコンの調子が悪い」「クラウドサービスを導入したい」など、ITのお困りごとを幅広く対応します。</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon">📋</div>
+          <h3>運用ルール整備</h3>
+          <p>IT機器の利用ルールやアカウント管理ポリシーなど、会社の規模に合ったシンプルなルール作りを支援します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title fade-up">料金の目安</h2>
+      <p class="section-desc fade-up">小規模な会社でも無理なく始められる価格設定です。詳細はお気軽にご相談ください。</p>
+      <div class="pricing-grid">
+        <div class="pricing-card fade-up">
+          <div class="pricing-name">スタート</div>
+          <div class="pricing-price">¥50,000<span>〜 / 初期</span></div>
+          <div class="pricing-note">+ 月額保守 ¥10,000〜</div>
+          <ul class="pricing-features">
+            <li>社員情報システム導入</li>
+            <li>初期設定・データ移行</li>
+            <li>操作マニュアル作成</li>
+            <li>導入後1ヶ月サポート</li>
+          </ul>
+        </div>
+        <div class="pricing-card featured fade-up">
+          <div class="pricing-badge">おすすめ</div>
+          <div class="pricing-name">スタンダード</div>
+          <div class="pricing-price">¥80,000<span>〜 / 初期</span></div>
+          <div class="pricing-note">+ 月額保守 ¥15,000〜</div>
+          <ul class="pricing-features">
+            <li>スタートプランの全内容</li>
+            <li>入退社フロー整備</li>
+            <li>Slack通知連携</li>
+            <li>デバイス管理台帳</li>
+            <li>継続的な運用サポート</li>
+          </ul>
+        </div>
+        <div class="pricing-card fade-up">
+          <div class="pricing-name">カスタム</div>
+          <div class="pricing-price">要相談</div>
+          <div class="pricing-note">御社の状況に合わせてご提案</div>
+          <ul class="pricing-features">
+            <li>上記に含まれない要件</li>
+            <li>既存システムとの連携</li>
+            <li>複数拠点への対応</li>
+            <li>その他お困りごと全般</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-visual fade-up">🖥️</div>
+        <div class="about-text fade-up">
+          <span class="section-label">About</span>
+          <h2>社内IT管理、<br>もっとシンプルに。</h2>
+          <p>
+            uemayoは、中小企業の社内IT管理を専門とするITサポートサービスです。
+            「ITのことは専門家に任せたいけど、大きな会社には頼みにくい」という
+            中小企業の皆さまのために、気軽に相談できる身近なITパートナーを目指しています。
+          </p>
+          <p>
+            企業のIT管理部門での実務経験をもとに、現場で本当に使える
+            シンプルなシステムと運用をご提案します。
+          </p>
+          <div class="about-tags">
+            <span class="about-tag">Microsoft 365</span>
+            <span class="about-tag">Intune</span>
+            <span class="about-tag">Google Workspace</span>
+            <span class="about-tag">Slack</span>
+            <span class="about-tag">業務自動化</span>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <span class="section-label">Contact</span>
+        <h2 class="section-title">まずはお気軽にご相談ください</h2>
+        <p class="section-desc">
+          「うちの会社でも使えるの？」「費用感を知りたい」など、<br>
+          どんな小さなことでも歓迎です。
+        </p>
+        <div class="contact-box">
+          <a href="mailto:info@uemayo.com" class="contact-email">info@uemayo.com</a>
+          <p class="contact-note"></p>
+          <a href="mailto:info@uemayo.com" class="contact-cta">メールで問い合わせる</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 <strong>uemayo</strong> All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 80 * (entry.target.dataset.delay || 0));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+      el.dataset.delay = i % 4;
+      observer.observe(el);
+    });
+  </script>
+
 </body>
 </html>
